@@ -9,10 +9,9 @@ namespace MMORPG
     {
         public void ConfigureServices(IServiceCollection services)
         {
-            string con = "Server=DESKTOP-6SFGD2C;Database=usersdbstore;Trusted_Connection=True;";
+            string con = "Server=DESKTOP-6SFGD2C;Database=TestDB;Trusted_Connection=True;";
             // устанавливаем контекст данных
             services.AddDbContext<UsersContext>(options => options.UseSqlServer(con));
-
             services.AddControllers(); // используем контроллеры без представлений
         }
 
@@ -20,11 +19,14 @@ namespace MMORPG
         {
             app.UseDeveloperExceptionPage();
 
+            app.UseDefaultFiles();
+            app.UseStaticFiles();
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers(); // подключаем маршрутизацию на контроллеры
+                endpoints.MapControllers();
             });
         }
     }
